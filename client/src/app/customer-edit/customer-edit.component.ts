@@ -11,6 +11,7 @@ import { CustomerService } from '../shared/customer/customer.service';
 })
 export class CustomerEditComponent implements OnInit, OnDestroy {
   customer: any = {};
+  riskCategories: Array<string> = ['A', 'B', 'C'];
   sub: Subscription;
 
   constructor(
