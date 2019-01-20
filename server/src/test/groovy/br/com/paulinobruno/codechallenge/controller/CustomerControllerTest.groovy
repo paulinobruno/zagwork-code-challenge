@@ -61,6 +61,29 @@ class CustomerControllerTest extends AbstractTests {
                 .andExpect(jsonPath('$[:1].name').value(sample.name))
     }
 
+    void 'GET /customers/0 should be NOT_FOUND'() {
+        when:
+            ResultActions result = mvc.perform(
+                get('/customers/0')
+                    .contentType(APPLICATION_JSON)
+            )
+
+        then:
+            result.andExpect(status().isNotFound())
+    }
+
+    void 'GET /customers/:existing should be OK'() {
+        when:
+            ResultActions result = mvc.perform(
+                get("/customers/${sample.id}")
+                    .contentType(APPLICATION_JSON)
+            )
+
+        then:
+            result.andExpect(status().isOk())
+                .andExpect(jsonPath('$.name').value(sample.name))
+    }
+
     void 'DELETE /:xpto should be NOT_FOUND'() {
         when:
             ResultActions result = mvc.perform(

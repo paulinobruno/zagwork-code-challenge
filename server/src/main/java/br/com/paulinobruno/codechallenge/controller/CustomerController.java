@@ -48,6 +48,11 @@ public class CustomerController {
         return repository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Customer getCustomer(@PathVariable Integer id) {
+        return findCustomer(id);
+    }
+
     @PutMapping("/{id}")
     @ResponseStatus(value = ACCEPTED)
     public void updateCustomer(@PathVariable Integer id, @Valid @RequestBody Customer customer) {
