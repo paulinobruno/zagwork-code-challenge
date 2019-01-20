@@ -1,3 +1,23 @@
-<p>
-  customer-edit works!
-</p>
+<mat-card>
+    <form #customerForm="ngForm" (ngSubmit)="save(customerForm.value)">
+        <mat-card-header>
+            <mat-card-title>
+                <h2>{{customer.id ? 'Alterar' : 'Criar'}} Cliente</h2>
+            </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <input type="hidden" name="id" [(ngModel)]="customer.id">
+
+            <mat-form-field>
+                <input matInput placeholder="Nome" [(ngModel)]="customer.name" required name="name" #name>
+            </mat-form-field>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!customerForm.form.valid">Salvar</button>
+            <button mat-raised-button color="secondary" (click)="remove(customer.id)" *ngIf="customer && customer.id" type="button">Excluir</button>
+            <a mat-button routerLink="/customer-list">Cancelar</a>
+        </mat-card-actions>
+    </form>
+</mat-card>
