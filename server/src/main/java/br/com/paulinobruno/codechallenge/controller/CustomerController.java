@@ -4,6 +4,7 @@ import br.com.paulinobruno.codechallenge.domain.Customer;
 import br.com.paulinobruno.codechallenge.exception.NotFoundException;
 import br.com.paulinobruno.codechallenge.repository.CustomerRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @RequestMapping("/customers")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CustomerController {
 
     private CustomerRepository repository;
@@ -44,6 +46,11 @@ public class CustomerController {
     @GetMapping
     public List<Customer> getCustomers() {
         return repository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Customer getCustomer(@PathVariable Integer id) {
+        return findCustomer(id);
     }
 
     @PutMapping("/{id}")
