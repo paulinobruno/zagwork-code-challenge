@@ -3,8 +3,12 @@
     <mat-card-content>
         <mat-list>
             <mat-list-item *ngFor="let customer of customers">
-                <h3 mat-line>{{ customer.name }}</h3>
+                <h3 mat-line>
+                    <a mat-button [routerLink]="['/customer-edit', customer.id]">{{ customer.name }}</a>
+                </h3>
             </mat-list-item>
         </mat-list>
     </mat-card-content>
+
+    <button mat-fab color="primary" [routerLink]="['/customer-add']">Novo</button>
 </mat-card>
